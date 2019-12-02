@@ -1,14 +1,16 @@
 import React from "react";
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Route,
   Redirect,
   Switch
 } from "react-router-dom";
-import Home from "../Routes/Home";
-import TV from "../Routes/TV";
-import Search from "../Routes/Search";
-import Header from "./Header";
+import Home from "Routes/Home";
+import TV from "Routes/TV";
+import Header from "Components/Header";
+import Search from "Routes/Search";
+import Detail from "Routes/Detail";
+import Video from "Routes/Videos";
 
 export default () => (
   <Router>
@@ -16,8 +18,14 @@ export default () => (
       <Header />
       <Switch>
         <Route path="/" exact component={Home} />
-        <Route path="/TV" component={TV} />
-        <Route path="/Search" component={Search} />
+        <Route path="/tv" component={TV} />
+        <Route path="/search" component={Search} />
+        <Route path="/movie/:id/video/:videoId" component={Video} />
+        <Route path="/movie/:id/video" component={Video} />
+        <Route path="/movie/:id" component={Detail} />
+        <Route path="/show/:id/video/:videoId" component={Video} />
+        <Route path="/show/:id/video" component={Video} />
+        <Route path="/show/:id" component={Detail} />
         <Redirect from="*" to="/" />
       </Switch>
     </>

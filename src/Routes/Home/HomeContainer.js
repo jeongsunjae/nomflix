@@ -1,24 +1,37 @@
 import React from "react";
 import HomePresenter from "./HomePresenter";
-import moviesAip from "../../api";
+import { moviesApi } from "api";
 
 export default class extends React.Component {
+  //기본 상태
   state = {
     nowPlaying: null,
     upcoming: null,
     popular: null,
     error: null,
-    loading: false
+    loading: true
   };
 
+  // 컴포넌트가 마운트 되면 async로 실행
   async componentDidMount() {
     try {
-      const nowPlaying = await moviesAip.nowPlaying();
-      console.log(nowPlaying);
-    } catch (e) {
-      //   console.log(e);
+      const {
+        data: { results: nowPlaying }
+      } = await moviesApi.nowPlaying();
+      const {
+        data: { results: upcoming }
+      } = await moviesApi.upcoming();
+      const {
+        data: { results: popular }
+      } = await moviesApi.popular();
       this.setState({
-        error: "Can't Find Movie information"
+        nowPlaying,
+        upcoming,
+        popular
+      });
+    } catch {
+      this.setState({
+        error: "Can't find movie information."
       });
     } finally {
       this.setState({
@@ -26,6 +39,7 @@ export default class extends React.Component {
       });
     }
   }
+
   render() {
     const { nowPlaying, upcoming, popular, error, loading } = this.state;
     return (
@@ -39,27 +53,3 @@ export default class extends React.Component {
     );
   }
 }
-
-// const state = {
-//   nowPlaying: null,
-//   upcoming: null,
-//   popular: null,
-//   error: null,
-//   loading: false
-// };
-// function HomeContainer() {
-//   const [value] = useState(state);
-//   const { nowPlaying, upcoming, popular, error, loading } = value;
-
-//   return (
-//     <HomePresenter
-//       nowPlaying={nowPlaying}
-//       upcoming={upcoming}
-//       popular={popular}
-//       error={error}
-//       loading={loading}
-//     />
-//   );
-// }
-
-// export default HomeContainer;
