@@ -16,6 +16,7 @@ function VideosContainer(props) {
   } = props;
 
   const movie = pathname.includes("/movie/");
+
   if (!isMovie) {
     setIsMovie(movie);
   }

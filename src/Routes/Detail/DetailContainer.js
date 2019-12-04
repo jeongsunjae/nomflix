@@ -47,6 +47,7 @@ export default class extends React.Component {
 
   render() {
     const { result, error, loading } = this.state;
+    console.log(result);
     const {
       location: { pathname }
     } = this.props;

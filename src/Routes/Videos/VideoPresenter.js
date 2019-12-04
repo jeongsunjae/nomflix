@@ -77,29 +77,20 @@ const Video = styled.li`
 `;
 
 const VideoPresenter = ({ data, error, loading, isMovie }) => {
-  console.log(isMovie);
-
+  //console.log(window.location.href);
   if (loading) {
     return <Loader />;
   } else if (error) {
     return <>{error}</>;
   } else if (data.results) {
+    // console.log(data.id);
     return renderVideoList(data.results, error, isMovie, data.id);
   }
-  // if (loading) {
-  //   return <>loading....</>;
-  // } else if (error && error.length > 0) {
-  //   return error;
-  // } else if (data.results !== null && data.results.results.length > 0) {
-  //   // return renderVideoList(result, error);
-  // } else {
-  //   // return renderNotFound();
-  // }
   return <div>테스트</div>;
 };
 
 const renderVideoList = (results, error, isMovie, id) => {
-  // console.log(results);
+  //console.log(id);
   const youtubeOpts = {
     height: "100%",
     width: "100%",
@@ -110,9 +101,14 @@ const renderVideoList = (results, error, isMovie, id) => {
 
   const videoLink = isMovie ? `/movie/${id}/video` : `/show/${id}/video`;
 
-  console.log(`1${videoLink.split("/videos")[0]}`);
-  console.log(`2${results.key}`);
-  console.log(results);
+  // console.log(`1${videoLink.split("/videos")[0]}`);
+  // console.log(`2${results.key}`);
+  // console.log(results);
+  const test = window.location.href.split(
+    "http://localhost:3000/#/movie/330457/video/"
+  )[1];
+  console.log(test);
+  // console.log(test.split("http://localhost:3000/#/movie/330457/video/"));
   return (
     <Container>
       <TitleContainer>
@@ -125,7 +121,11 @@ const renderVideoList = (results, error, isMovie, id) => {
       </TitleContainer>
       <VideoContainer>
         <VideoViewerContainer>
-          <VideoPlayer videoId={results[0].key} opts={youtubeOpts} />
+          {test === undefined ? (
+            <VideoPlayer videoId={results[0].key} opts={youtubeOpts} />
+          ) : (
+            <VideoPlayer videoId={test} opts={youtubeOpts} />
+          )}
         </VideoViewerContainer>
         <VideoListContainer>
           <Videos>
