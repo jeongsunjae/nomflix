@@ -105,7 +105,7 @@ const renderVideoList = (results, error, isMovie, id) => {
   // console.log(`2${results.key}`);
   // console.log(results);
   const test = window.location.href.split(
-    "http://localhost:3000/#/movie/330457/video/"
+    `http://localhost:3000/#/movie/${id}/video/`
   )[1];
   console.log(test);
   // console.log(test.split("http://localhost:3000/#/movie/330457/video/"));
