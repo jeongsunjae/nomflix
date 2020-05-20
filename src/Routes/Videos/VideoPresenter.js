@@ -104,10 +104,10 @@ const renderVideoList = (results, error, isMovie, id) => {
   // console.log(`1${videoLink.split("/videos")[0]}`);
   // console.log(`2${results.key}`);
   // console.log(results);
-  const test = window.location.href.split(
+  const youtubeid = window.location.href.split(
     `http://localhost:3000/#/movie/${id}/video/`
   )[1];
-  console.log(test);
+  console.log(youtubeid);
   // console.log(test.split("http://localhost:3000/#/movie/330457/video/"));
   return (
     <Container>
@@ -121,10 +121,10 @@ const renderVideoList = (results, error, isMovie, id) => {
       </TitleContainer>
       <VideoContainer>
         <VideoViewerContainer>
-          {test === undefined ? (
+          {youtubeid === undefined ? (
             <VideoPlayer videoId={results[0].key} opts={youtubeOpts} />
           ) : (
-            <VideoPlayer videoId={test} opts={youtubeOpts} />
+            <VideoPlayer videoId={youtubeid} opts={youtubeOpts} />
           )}
         </VideoViewerContainer>
         <VideoListContainer>
